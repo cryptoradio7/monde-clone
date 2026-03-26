@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import db from "@/lib/db";
 import { RUBRIQUES } from "@/lib/utils";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { SITE_URL as BASE_URL } from "@/lib/config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await db.article.findMany({

@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { RUBRIQUES } from "@/lib/utils";
 import Script from "next/script";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+import { SITE_URL as BASE_URL } from "@/lib/config";
 
 interface Props {
   params: Promise<{ slug: string }>;

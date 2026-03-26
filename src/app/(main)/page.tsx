@@ -10,7 +10,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Le Monde — Actualités et Informations en France et dans le monde",
   description: "Toute l'actualité en France et dans le monde : politique, économie, culture, sport, sciences. Analyses et décryptages.",
-  alternates: { canonical: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000" },
+  alternates: { canonical: process.env.NEXT_PUBLIC_SITE_URL },
   openGraph: {
     title: "Le Monde — Actualités et Informations en France et dans le monde",
     description: "Toute l'actualité en France et dans le monde.",
