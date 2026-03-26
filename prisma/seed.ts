@@ -17,6 +17,7 @@ const articles = [
     author: "Marie Dupont",
     tags: JSON.stringify(["économie", "gouvernement", "relance", "budget"]),
     isPremium: false,
+    articleType: "Analyse",
   },
   {
     title: "Guerre en Ukraine : les négociations de paix reprennent à Genève",
@@ -345,6 +346,9 @@ async function main() {
         ...article,
         slug,
         publishedAt,
+        articleType: article.articleType ?? "Article",
+        imageCredit: (article as { imageCredit?: string }).imageCredit ?? null,
+        viewCount: Math.floor(Math.random() * 500),
       },
     });
   }

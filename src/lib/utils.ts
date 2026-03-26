@@ -1,43 +1,56 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-import { format, formatDistanceToNow } from 'date-fns'
-import { fr } from 'date-fns/locale'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+import { format, formatDistanceToNow } from "date-fns";
+import { fr } from "date-fns/locale";
 
 export function formatDate(date: Date | string): string {
-  return format(new Date(date), 'dd MMMM yyyy', { locale: fr })
+  return format(new Date(date), "d MMMM yyyy", { locale: fr });
 }
 
-export function formatDateRelative(date: Date | string): string {
-  return formatDistanceToNow(new Date(date), { addSuffix: true, locale: fr })
+export function formatDateShort(date: Date | string): string {
+  return format(new Date(date), "dd/MM/yyyy", { locale: fr });
 }
 
-export function truncate(str: string, length: number): string {
-  if (str.length <= length) return str
-  return str.slice(0, length) + '...'
+export function formatRelativeDate(date: Date | string): string {
+  return formatDistanceToNow(new Date(date), { addSuffix: true, locale: fr });
 }
 
-export function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim()
+export function truncate(text: string, length: number = 150): string {
+  if (text.length <= length) return text;
+  return text.substring(0, length).trimEnd() + "…";
 }
 
-export const CATEGORIES = [
-  'France',
-  'International',
-  'Économie',
-  'Culture',
-  'Sport',
-  'Sciences',
-] as const
+export function parseTags(tagsJson: string): string[] {
+  try {
+    return JSON.parse(tagsJson);
+  } catch {
+    return [];
+  }
+}
 
-export type Category = (typeof CATEGORIES)[number]
+export function estimateReadingTime(htmlContent: string): number {
+  const text = htmlContent.replace(/<[^>]+>/g, " ");
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+export const RUBRIQUES = [
+  "France",
+  "International",
+  "Économie",
+  "Culture",
+  "Sport",
+  "Sciences",
+  "Politique",
+  "Société",
+];
+
+export const ARTICLE_TYPES = [
+  "Article",
+  "Reportage",
+  "Analyse",
+  "Chronique",
+  "Décryptage",
+  "Enquête",
+  "Synthèse",
+] as const;
+
+export type ArticleType = (typeof ARTICLE_TYPES)[number];

@@ -5,10 +5,13 @@ export interface Article {
   excerpt: string;
   content: string;
   imageUrl: string | null;
+  imageCredit: string | null;
   author: string;
   rubrique: string;
+  articleType: string;
   tags: string;
   isPremium: boolean;
+  viewCount: number;
   publishedAt: Date;
   createdAt: Date;
   updatedAt: Date;
